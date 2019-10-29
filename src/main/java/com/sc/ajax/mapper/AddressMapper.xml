@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.ajax.dao.AddressMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.ajax.bean.Address" >
+    <id column="add_id" property="addId" jdbcType="INTEGER" />
+    <result column="shr" property="shr" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="sheng" property="sheng" jdbcType="VARCHAR" />
+    <result column="shi" property="shi" jdbcType="VARCHAR" />
+    <result column="qu" property="qu" jdbcType="VARCHAR" />
+    <result column="detail" property="detail" jdbcType="VARCHAR" />
+    <result column="def" property="def" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    add_id, shr, phone, sheng, shi, qu, detail, def, state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from address
+    where add_id = #{addId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="chaAddresslist" resultMap="BaseResultMap">
+	select * from address where state=1
+  </select>
+  
+  <update id="delAddress">
+  	update address set state=0 where add_id=#{addId}
+  </update>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from address
+    where add_id = #{addId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sc.ajax.bean.Address" >
+    insert into address (add_id, shr, phone, 
+      sheng, shi, qu, detail, 
+      def, state)
+    values (#{addId,jdbcType=INTEGER}, #{shr,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{sheng,jdbcType=VARCHAR}, #{shi,jdbcType=VARCHAR}, #{qu,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, 
+      #{def,jdbcType=INTEGER}, #{state,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.ajax.bean.Address" >
+    insert into address
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="addId != null" >
+        add_id,
+      </if>
+      <if test="shr != null" >
+        shr,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="sheng != null" >
+        sheng,
+      </if>
+      <if test="shi != null" >
+        shi,
+      </if>
+      <if test="qu != null" >
+        qu,
+      </if>
+      <if test="detail != null" >
+        detail,
+      </if>
+      <if test="def != null" >
+        def,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="addId != null" >
+        #{addId,jdbcType=INTEGER},
+      </if>
+      <if test="shr != null" >
+        #{shr,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="sheng != null" >
+        #{sheng,jdbcType=VARCHAR},
+      </if>
+      <if test="shi != null" >
+        #{shi,jdbcType=VARCHAR},
+      </if>
+      <if test="qu != null" >
+        #{qu,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="def != null" >
+        #{def,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.ajax.bean.Address" >
+    update address
+    <set >
+      <if test="shr != null" >
+        shr = #{shr,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="sheng != null" >
+        sheng = #{sheng,jdbcType=VARCHAR},
+      </if>
+      <if test="shi != null" >
+        shi = #{shi,jdbcType=VARCHAR},
+      </if>
+      <if test="qu != null" >
+        qu = #{qu,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="def != null" >
+        def = #{def,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where add_id = #{addId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.ajax.bean.Address" >
+    update address
+    set shr = #{shr,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      sheng = #{sheng,jdbcType=VARCHAR},
+      shi = #{shi,jdbcType=VARCHAR},
+      qu = #{qu,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=VARCHAR},
+      def = #{def,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER}
+    where add_id = #{addId,jdbcType=INTEGER}
+  </update>
+</mapper>
